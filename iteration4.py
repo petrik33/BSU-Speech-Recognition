@@ -3,6 +3,7 @@ from vosk import Model, KaldiRecognizer
 from scipy import signal
 import numpy as np
 
+# Настройка аудио записи
 FORMAT = pyaudio.paInt16  # Формат аудиоданных (16 бит, стерео)
 CHANNELS = 1  # Количество каналов (моно)
 RATE = 16000  # Частота дискретизации (16 кГц)
@@ -15,8 +16,10 @@ model = Model('models/ru')
 rec = KaldiRecognizer(model, RATE)
 
 # Настройка фильтрации шума
-cutoff = 6000
-b, a = signal.butter(5, cutoff, fs=RATE)
+CUTOFF = 6000 # Частота среза (6 кГц)
+FILTER_ORDER = 5 # Порядок фильтрации
+
+b, a = signal.butter(FILTER_ORDER, CUTOFF, fs=RATE)
 
 print("Listening...")
 
