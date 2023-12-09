@@ -5,7 +5,7 @@ model = Model("models/ru")  # Загрузка модели для русско�
 rec = KaldiRecognizer(model, 16000)
 
 # Открытие аудиофайла
-wf = wave.open("recorded_audio.wav", "rb")
+wf = wave.open("filtered_audio.wav", "rb")
 
 # Чтение всех данных из аудиофайла
 data = wf.readframes(wf.getnframes())
