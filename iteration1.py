@@ -5,6 +5,7 @@ FORMAT = pyaudio.paInt16  # Формат аудиоданных (16 бит, ст
 CHANNELS = 1  # Количество каналов (моно)
 RATE = 16000  # Частота дискретизации (16 кГц)
 CHUNK = 1024  # Количество фреймов в буфере
+RECORD_LENGTH = 5  # Длительность записи в секундах
 
 audio = pyaudio.PyAudio()
 
@@ -17,8 +18,8 @@ print("Recording...")
 
 frames = []
 
-# Запись аудио в файл (для простоты примера записываем только 5 секунд)
-for i in range(0, int(RATE / CHUNK * 5)):
+# Запись аудио в файл
+for i in range(0, int(RATE / CHUNK * RECORD_LENGTH)):
     data = stream.read(CHUNK)
     frames.append(data)
 
