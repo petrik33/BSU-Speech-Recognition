@@ -10,15 +10,11 @@ stream.start_stream()
 
 def listen():
     while True:
-        try:
-            data = stream.read(4000, exception_on_overflow=False)
-            
-            if rec.AcceptWaveform(data) and len(data) > 0:
-                answer = json.loads(rec.Result())
-                if answer['text']:
-                    yield answer['text']
-        except KeyboardInterrupt:
-            continue
+        data = stream.read(4000, exception_on_overflow=False)    
+        if rec.AcceptWaveform(data) and len(data) > 0:
+            answer = json.loads(rec.Result())
+            if answer['text']:
+                yield answer['text']
 
 try:
     for text in listen():
